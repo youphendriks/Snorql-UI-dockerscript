@@ -1,7 +1,7 @@
 #!/bin/bash
 #Clone Snorql-UI
 echo Now cloning the Snorql-UI git
-git clone git@github.com:wikipathways/Snorql-UI.git
+git clone https://github.com/wikipathways/Snorql-UI.git
 #Create directories
 echo Creating some directories
 mkdir db
