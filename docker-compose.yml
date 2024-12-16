@@ -4,7 +4,7 @@ services:
     restart: always
     container_name: wikipathways-virtuoso
     volumes:
-      - ~/{username}/git/docker/:/ # directory to persist the Virtuoso database. If empty dir, a new database will be created
+      - ~/Snorql-UI-dockerscript/git/docker/:/db/database # directory to persist the Virtuoso database. If empty dir, a new database will be created
     environment:
       - DBA_PASSWORD=dba
       - SPARQL_UPDATE=false
@@ -16,7 +16,7 @@ services:
     restart: always
     container_name: wikipathways-snorql
     volumes:
-     - ~/{username}/git/docker/snorql-extended:/usr/local/apache2/htdocs # To customize the snorql interface, clone the GitHub repo and use its directory as SNORQL_WEB_FILES_DIR
+     - ~/Snorql-UI-dockerscript/git/docker/snorql-extended:/usr/local/apache2/htdocs # To customize the snorql interface, clone the GitHub repo and use its directory as SNORQL_WEB_FILES_DIR
     environment:
       - SNORQL_ENDPOINT=https://sparql.wikipathways.org/sparql/
       - SNORQL_EXAMPLES_REPO=https://github.com/wikipathways/SPARQLQueries
