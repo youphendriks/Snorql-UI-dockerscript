@@ -1,0 +1,27 @@
+services:
+  wikipathways-virtuoso:
+    image: openlink/virtuoso-opensource-7:7.2.11
+    restart: always
+    container_name: wikipathways-virtuoso
+    volumes:
+      - ~/{username}/git/docker/:/ # directory to persist the Virtuoso database. If empty dir, a new database will be created
+    environment:
+      - DBA_PASSWORD=dba
+      - SPARQL_UPDATE=false
+    ports:
+      - "8890:8890"
+      - "1111:1111"
+  snorql:
+    image: aammar/snorql-httpd:latest
+    restart: always
+    container_name: wikipathways-snorql
+    volumes:
+     - ~/{username}/git/docker/snorql-extended:/usr/local/apache2/htdocs # To customize the snorql interface, clone the GitHub repo and use its directory as SNORQL_WEB_FILES_DIR
+    environment:
+      - SNORQL_ENDPOINT=https://sparql.wikipathways.org/sparql/
+      - SNORQL_EXAMPLES_REPO=https://github.com/wikipathways/SPARQLQueries
+      - SNORQL_TITLE=WikiPathways SNORQL UI
+      - DEFAULT_GRAPH=http://rdf.wikipathways.org/
+    ports:
+      - "8080:80"
+      - "443:443"
